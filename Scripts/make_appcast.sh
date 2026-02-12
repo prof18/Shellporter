@@ -9,10 +9,6 @@ ZIP=${1:?
 "Usage: $0 Shellporter-<ver>.zip"}
 FEED_URL=${2:-${SPARKLE_FEED_URL:-"https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml"}}
 PRIVATE_KEY_FILE=${SPARKLE_PRIVATE_KEY_FILE:-}
-if [[ -z "$PRIVATE_KEY_FILE" ]]; then
-  echo "Set SPARKLE_PRIVATE_KEY_FILE to your ed25519 private key (Sparkle)." >&2
-  exit 1
-fi
 if [[ ! -f "$ZIP" ]]; then
   echo "Zip not found: $ZIP" >&2
   exit 1
@@ -72,8 +68,11 @@ cp "$ZIP" "$WORK_DIR/$ZIP_NAME"
 cp "$NOTES_HTML" "$WORK_DIR/$ZIP_BASE.html"
 
 pushd "$WORK_DIR" >/dev/null
-generate_appcast \
-  --ed-key-file "$PRIVATE_KEY_FILE" \
+APPCAST_CMD=(generate_appcast)
+if [[ -n "$PRIVATE_KEY_FILE" ]]; then
+  APPCAST_CMD+=(--ed-key-file "$PRIVATE_KEY_FILE")
+fi
+"${APPCAST_CMD[@]}" \
   --download-url-prefix "$DOWNLOAD_URL_PREFIX" \
   --embed-release-notes \
   --link "$FEED_URL" \

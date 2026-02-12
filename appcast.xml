@@ -1,15 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"
-     xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
-     xmlns:dc="http://purl.org/dc/elements/1.1/">
-<channel>
-  <title>Shellporter Updates</title>
-  <description>Shellporter release feed</description>
-  <language>en</language>
-  <item>
-    <title>Bootstrap Feed</title>
-    <description>Initial placeholder appcast entry.</description>
-    <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
-  </item>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>Shellporter Updates</title>
+        <description>Shellporter release feed</description>
+        <language>en</language>
+        <item>
+            <title>Bootstrap Feed</title>
+            <description>Initial placeholder appcast entry.</description>
+            <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.1.0</title>
+            <pubDate>Thu, 12 Feb 2026 22:32:17 +0100</pubDate>
+            <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h2>Shellporter 0.1.0</h2>
+<ul>
+<li>Initial release</li>
+<li>Open a terminal in the active IDE project folder with a global hotkey</li>
+<li>IDE support: JetBrains family, Android Studio, VS Code, VSCodium, Cursor, Xcode</li>
+<li>Terminal support: Terminal.app, iTerm2, Kitty, Ghostty, custom command</li>
+<li>Smart project path resolution via accessibility, title heuristics, and IDE recents</li>
+<li>Global shortcuts for opening terminal and copying <code>cd</code> command</li>
+<li>Menu bar app with preferences for terminal selection, hotkey customization, and diagnostics</li>
+<li>Auto-update support via Sparkle</li>
+</ul>
+<p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
+]]></description>
+            <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.0/Shellporter-0.1.0.zip" length="2404522" type="application/octet-stream" sparkle:edSignature="7yzR39WaznRvBRMpbv91bjAqtDcRxWFLY4Z5IewBRhvsnPdjWFSKiPrdSQ6ifWFIiRkkDaIUEo01itruT9lmDA=="/>
+        </item>
+    </channel>
 </rss>
