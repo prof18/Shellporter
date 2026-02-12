@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode / Derived data (even without an .xcodeproj, tools may generate these)
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# App packaging / release artifacts
+dist/
+release/
+*.app
+*.dmg
+*.zip
+
+# Local env/config
+.env
+.env.*
+!.env.example
+
+# Editor metadata
+.vscode/
+.tmp
+firebase-debug.log

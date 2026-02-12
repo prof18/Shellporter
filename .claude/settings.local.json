@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(swift build:*)",
+      "Bash(swift test:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(swift:*)",
+      "WebSearch",
+      "Bash(gh api:*)"
+    ]
+  }
+}

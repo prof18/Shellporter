@@ -1,0 +1,74 @@
+"terminals-custom-command" = "Custom Command";
+
+"menu-accessibility-missing" = "Accessibility: Missing";
+"menu-request-accessibility-permission" = "Request Accessibility Permission";
+"menu-open-accessibility-settings" = "Open Accessibility Settings";
+"menu-open-terminal-in-current-project" = "Open Terminal in Current Project";
+"menu-focus-terminal-copy-command" = "Focus Terminal + Copy Command";
+"menu-focus-terminal-copy-command-hint" = "Paste it to navigate to this project folder.";
+"menu-open-with" = "Open With";
+"menu-about-shellporter" = "About Shellporter…";
+"menu-preferences" = "Settings…";
+"menu-check-for-updates" = "Check for Updates…";
+"menu-quit-shellporter" = "Quit Shellporter";
+
+"about-description" = "Shellporter opens your terminal directly in the project folder of the currently active IDE window.";
+"about-version-format" = "Version %@ (%@)";
+"about-link-github" = "GitHub";
+"about-link-website" = "Website";
+"about-link-twitter" = "Twitter";
+
+"settings-section-default-terminal" = "Default Terminal";
+"settings-field-terminal" = "Terminal";
+"settings-ghostty-open-new-window" = "Open in new window (separate Space)";
+"settings-ghostty-open-new-window-hint" = "When on, each shortcut opens a new Ghostty window that can stay on another Space. May show an extra dock icon per window. When off, the new tab opens in the instance macOS selects (usually the frontmost) if you have multiple Ghostty instances.";
+"settings-section-custom-terminal-command" = "Custom Terminal Command";
+"settings-custom-command-description" = "A custom command to run instead of the built-in terminal launchers.";
+"settings-field-template" = "Template";
+"settings-custom-command-hint" = "Use {path} as the placeholder for the project path.";
+"settings-custom-command-missing-path-warning" = "Template does not contain {path}. The project path will not be passed to the command.";
+"settings-section-accessibility" = "Accessibility";
+"settings-accessibility-status" = "Status";
+"settings-accessibility-granted" = "Granted";
+"settings-accessibility-missing" = "Missing";
+"settings-accessibility-open-settings" = "Open Accessibility Settings";
+"settings-accessibility-refresh-status" = "Refresh Status";
+"settings-accessibility-hint" = "Shellporter needs Accessibility permission to read the active IDE window and resolve the project path.";
+"settings-section-global-shortcuts" = "Global Shortcuts";
+"settings-open-terminal-shortcut" = "Open Terminal shortcut";
+"settings-focus-terminal-copy-shortcut" = "Focus Terminal + Copy project command shortcut";
+"settings-cancel" = "Cancel";
+"settings-reset-default" = "Reset Default";
+"settings-focus-terminal-copy-hint" = "Brings Terminal to the front (or opens it if needed) and copies a command you can paste to jump into the current project folder.";
+"settings-hotkey-capture-hint" = "Record a shortcut using at least one modifier key. Changes are saved immediately.";
+"settings-section-diagnostics" = "Diagnostics";
+"settings-copy-last-resolution-diagnostics" = "Copy Last Resolution Diagnostics";
+"settings-diagnostics-hint" = "Diagnostics stay on your Mac and are never sent automatically. Use copy only when you want to share debugging details.";
+"settings-hotkey-error-modifier-required" = "Use at least one modifier (Control, Option, Shift, or Command).";
+"settings-hotkey-error-unsupported-key" = "That key is not supported for shortcuts.";
+"settings-press-shortcut" = "Press Shortcut…";
+"settings-record-shortcut" = "Record Shortcut";
+
+"alerts-project-path-not-found-title" = "Project Path Not Found";
+"alerts-project-path-not-found-message" = "Shellporter could not resolve the current project path to copy a cd command.";
+"alerts-failed-to-launch-terminal-title" = "Failed to Launch Terminal";
+"alerts-select-project-folder-title" = "Select Project Folder";
+"alerts-select-project-folder-message" = "Shellporter could not resolve the focused project path. Select a folder manually.";
+"alerts-open-terminal-prompt" = "Open Terminal";
+
+"onboarding-title" = "Accessibility Access Required";
+"onboarding-description" = "Shellporter reads the focused window of your IDE to detect the current project and open a terminal in the right folder. macOS requires Accessibility permission for this. Please grant access in System Settings.";
+"onboarding-open-system-settings" = "Open System Settings";
+"onboarding-quit" = "Quit";
+
+"window-preferences-title" = "Shellporter Settings";
+"window-onboarding-title" = "Shellporter Setup";
+"window-about-title" = "About Shellporter";
+
+"status-bar-fallback-title" = "SP";
+"status-bar-tooltip-default" = "Shellporter";
+"status-bar-tooltip-accessibility-missing" = "Shellporter (Accessibility permission missing)";
+"status-bar-symbol-accessibility-description" = "Shellporter";
+
+"terminal-launcher-invalid-custom-command" = "Custom command template is empty.";
+"terminal-launcher-apple-script-execution-failed" = "AppleScript execution failed.";
