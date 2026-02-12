@@ -4,12 +4,7 @@
         <title>Shellporter Updates</title>
         <description>Shellporter release feed</description>
         <language>en</language>
-        <item>
-            <title>Bootstrap Feed</title>
-            <description>Initial placeholder appcast entry.</description>
-            <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
-        </item>
-        <item>
+<item>
             <title>0.1.0</title>
             <pubDate>Thu, 12 Feb 2026 22:32:17 +0100</pubDate>
             <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
