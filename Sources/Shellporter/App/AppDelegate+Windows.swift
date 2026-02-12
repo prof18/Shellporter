@@ -29,7 +29,9 @@ extension AppDelegate {
     @objc
     func openAboutWindow() {
         if aboutWindowController == nil {
-            let view = AboutView()
+            let view = AboutView(onCheckForUpdates: { [weak self] in
+                self?.sparkleUpdater.checkForUpdates()
+            })
             let host = NSHostingController(rootView: view)
 
             let window = NSWindow(

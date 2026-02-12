@@ -6,7 +6,8 @@
       "mcp__ide__getDiagnostics",
       "Bash(swift:*)",
       "WebSearch",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(./Scripts/compile_and_run.sh:*)"
     ]
   }
 }

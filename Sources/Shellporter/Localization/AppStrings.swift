@@ -27,10 +27,10 @@ enum AppStrings {
         static let versionFormat = Localization.localized("about-version-format")
         static let github = Localization.localized("about-link-github")
         static let website = Localization.localized("about-link-website")
-        static let twitter = Localization.localized("about-link-twitter")
+        static let checkForUpdates = Localization.localized("about-check-for-updates")
+        static let copyright = Localization.localized("about-copyright")
         static let githubURL = "https://github.com/prof18/shellporter"
-        static let websiteURL = "https://github.com/prof18/shellporter"
-        static let twitterURL = "https://x.com/prof18"
+        static let websiteURL = "https://www.marcogomiero.com/"
     }
 
     // MARK: - Settings

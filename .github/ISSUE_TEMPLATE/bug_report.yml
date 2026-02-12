@@ -1,0 +1,67 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in Shellporter.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug.
+      placeholder: What happened? What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Open ...
+        2. Press ...
+        3. See error
+    validations:
+      required: true
+
+  - type: input
+    id: ide
+    attributes:
+      label: IDE
+      description: Which IDE were you using when the issue occurred?
+      placeholder: e.g. IntelliJ IDEA 2025.1, VS Code 1.98, Xcode 16
+
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal
+      description: Which terminal is configured in Shellporter?
+      placeholder: e.g. Terminal.app, iTerm2, Ghostty, Kitty, Custom Command
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Resolution Diagnostics
+      description: |
+        Open Shellporter **Settings -> Diagnostics** and click **Copy Last Resolution Diagnostics**, then paste the output here.
+        This helps us understand which resolution strategy was used and what went wrong.
+      render: text
+    validations:
+      required: false
+
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS Version
+      placeholder: e.g. macOS 15.3
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Shellporter Version
+      description: Shown in the About screen.
+      placeholder: e.g. 0.1.0 (1)

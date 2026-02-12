@@ -7,16 +7,17 @@
 "menu-focus-terminal-copy-command" = "Focus Terminal + Copy Command";
 "menu-focus-terminal-copy-command-hint" = "Paste it to navigate to this project folder.";
 "menu-open-with" = "Open With";
-"menu-about-shellporter" = "About Shellporter…";
-"menu-preferences" = "Settings…";
-"menu-check-for-updates" = "Check for Updates…";
-"menu-quit-shellporter" = "Quit Shellporter";
+"menu-about-shellporter" = "About Shellporter";
+"menu-preferences" = "Settings";
+"menu-check-for-updates" = "Check for Updates";
+"menu-quit-shellporter" = "Quit";
 
 "about-description" = "Shellporter opens your terminal directly in the project folder of the currently active IDE window.";
 "about-version-format" = "Version %@ (%@)";
 "about-link-github" = "GitHub";
 "about-link-website" = "Website";
-"about-link-twitter" = "Twitter";
+"about-check-for-updates" = "Check for Updates";
+"about-copyright" = "Copyright © 2026 Marco Gomiero. All rights reserved.";
 
 "settings-section-default-terminal" = "Default Terminal";
 "settings-field-terminal" = "Terminal";
@@ -61,9 +62,9 @@
 "onboarding-open-system-settings" = "Open System Settings";
 "onboarding-quit" = "Quit";
 
-"window-preferences-title" = "Shellporter Settings";
+"window-preferences-title" = "Settings";
 "window-onboarding-title" = "Shellporter Setup";
-"window-about-title" = "About Shellporter";
+"window-about-title" = "About";
 
 "status-bar-fallback-title" = "SP";
 "status-bar-tooltip-default" = "Shellporter";

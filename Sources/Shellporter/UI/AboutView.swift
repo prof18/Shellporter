@@ -2,6 +2,12 @@ import AppKit
 import SwiftUI
 
 struct AboutView: View {
+    private let onCheckForUpdates: () -> Void
+
+    init(onCheckForUpdates: @escaping () -> Void) {
+        self.onCheckForUpdates = onCheckForUpdates
+    }
+
     private struct SocialLink: Identifiable {
         let id: String
         let title: String
@@ -42,6 +48,21 @@ struct AboutView: View {
                     }
                 }
                 .padding(.top, 4)
+
+                Button(action: onCheckForUpdates) {
+                    Text(AppStrings.About.checkForUpdates)
+                        .font(.body)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 8)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .padding(.top, 8)
+
+                Text(AppStrings.About.copyright)
+                    .font(.footnote)
+                    .foregroundStyle(.tertiary)
+                    .padding(.top, 8)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 32)
@@ -63,12 +84,6 @@ struct AboutView: View {
                 title: AppStrings.About.website,
                 systemImage: "globe",
                 rawURL: AppStrings.About.websiteURL
-            ),
-            makeLink(
-                id: "twitter",
-                title: AppStrings.About.twitter,
-                systemImage: "bubble.left.and.bubble.right",
-                rawURL: AppStrings.About.twitterURL
             ),
         ]
         .compactMap { $0 }
