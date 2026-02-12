@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Add open at login option
+- Update about screen
+
 ## 0.1.0
 
 - Initial release

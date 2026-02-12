@@ -4,7 +4,23 @@
         <title>Shellporter Updates</title>
         <description>Shellporter release feed</description>
         <language>en</language>
-<item>
+        <item>
+            <title>0.1.1</title>
+            <pubDate>Thu, 12 Feb 2026 23:59:04 +0100</pubDate>
+            <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h2>Shellporter 0.1.1</h2>
+<ul>
+<li>Add open at login option</li>
+<li>Update about screen</li>
+</ul>
+<p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
+]]></description>
+            <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.1/Shellporter-0.1.1.zip" length="2417373" type="application/octet-stream" sparkle:edSignature="9lCv+DM7YY7MAEHhIzZEvN7qv9jt429e7dMmhanpw+Fk6Hod+93yAB/YHFTyzPS/vaA6SDnXPKVUf16J+aNHBA=="/>
+        </item>
+        <item>
             <title>0.1.0</title>
             <pubDate>Thu, 12 Feb 2026 22:32:17 +0100</pubDate>
             <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
