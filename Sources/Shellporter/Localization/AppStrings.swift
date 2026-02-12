@@ -35,6 +35,8 @@ enum AppStrings {
 
     // MARK: - Settings
     enum Settings {
+        static let sectionGeneral = Localization.localized("settings-section-general")
+        static let launchAtLogin = Localization.localized("settings-launch-at-login")
         static let sectionDefaultTerminal = Localization.localized("settings-section-default-terminal")
         static let fieldTerminal = Localization.localized("settings-field-terminal")
         static let ghosttyOpenNewWindow = Localization.localized("settings-ghostty-open-new-window")

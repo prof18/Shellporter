@@ -19,6 +19,8 @@
 "about-check-for-updates" = "Check for Updates";
 "about-copyright" = "Copyright © 2026 Marco Gomiero. All rights reserved.";
 
+"settings-section-general" = "General";
+"settings-launch-at-login" = "Launch at Login";
 "settings-section-default-terminal" = "Default Terminal";
 "settings-field-terminal" = "Terminal";
 "settings-ghostty-open-new-window" = "Open in new window (separate Space)";

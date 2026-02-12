@@ -1,4 +1,5 @@
 import AppKit
+import ServiceManagement
 import SwiftUI
 
 struct SettingsView: View {
@@ -8,6 +9,7 @@ struct SettingsView: View {
     }
 
     @ObservedObject var viewModel: SettingsViewModel
+    @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var accessibilityGranted = AXWindowInspector.isAccessibilityTrusted()
     @State private var recordingTarget: ShortcutRecordingTarget?
     @State private var hotkeyCaptureMonitor: Any?
@@ -15,6 +17,21 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            Section(AppStrings.Settings.sectionGeneral) {
+                Toggle(AppStrings.Settings.launchAtLogin, isOn: $launchAtLogin)
+                    .onChange(of: launchAtLogin) { _, newValue in
+                        do {
+                            if newValue {
+                                try SMAppService.mainApp.register()
+                            } else {
+                                try SMAppService.mainApp.unregister()
+                            }
+                        } catch {
+                            launchAtLogin = SMAppService.mainApp.status == .enabled
+                        }
+                    }
+            }
+
             Section(AppStrings.Settings.sectionDefaultTerminal) {
                 Picker(AppStrings.Settings.fieldTerminal, selection: $viewModel.config.defaultTerminal) {
                     ForEach(TerminalChoice.allCases) { terminal in
