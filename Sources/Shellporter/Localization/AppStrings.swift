@@ -112,7 +112,7 @@ private enum Localization {
         NSLocalizedString(
             key,
             tableName: "Localizable",
-            bundle: .module,
+            bundle: .appResources,
             value: key,
             comment: ""
         )

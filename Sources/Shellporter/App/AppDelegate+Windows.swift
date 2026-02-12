@@ -157,8 +157,8 @@ extension AppDelegate {
 
         for name in names {
             guard
-                let url = Bundle.module.url(forResource: name, withExtension: "png")
-                    ?? Bundle.module.url(forResource: name, withExtension: "png", subdirectory: "MenuBarIcons"),
+                let url = Bundle.appResources.url(forResource: name, withExtension: "png")
+                    ?? Bundle.appResources.url(forResource: name, withExtension: "png", subdirectory: "MenuBarIcons"),
                 let sourceImage = NSImage(contentsOf: url)
             else {
                 continue
