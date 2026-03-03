@@ -5,6 +5,21 @@
         <description>Shellporter release feed</description>
         <language>en</language>
         <item>
+            <title>0.1.2</title>
+            <pubDate>Tue, 03 Mar 2026 13:15:16 +0100</pubDate>
+            <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h2>Shellporter 0.1.2</h2>
+<ul>
+<li>Fix Ghostty launch fallback when macOS CLI <code>+new-window</code> exits with an error</li>
+</ul>
+<p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
+]]></description>
+            <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.2/Shellporter-0.1.2.zip" length="2418654" type="application/octet-stream" sparkle:edSignature="9ktSiC7/MrXDV0n2X+gpoIA9EhllQv9Qm/WoVId14MAHTObzjQrknUOUn1MvLgwqJWG8zmvrN4LMTct9fafMAA=="/>
+        </item>
+        <item>
             <title>0.1.1</title>
             <pubDate>Thu, 12 Feb 2026 23:59:04 +0100</pubDate>
             <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
