@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Fix Ghostty launch fallback when macOS CLI `+new-window` exits with an error
+
 ## 0.1.1
 
 - Add open at login option

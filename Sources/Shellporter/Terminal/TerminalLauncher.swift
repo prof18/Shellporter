@@ -127,10 +127,25 @@ final class TerminalLauncher {
         }
 
         do {
-            try launchProcess(
-                executable: executable,
-                arguments: ["+new-window", "--working-directory=\(path.path)"]
-            )
+            let process = Process()
+            process.executableURL = URL(fileURLWithPath: executable)
+            process.arguments = ["+new-window", "--working-directory=\(path.path)"]
+            let stderr = Pipe()
+            process.standardError = stderr
+            try process.run()
+            process.waitUntilExit()
+
+            guard process.terminationStatus == 0 else {
+                let errorText = String(
+                    data: stderr.fileHandleForReading.readDataToEndOfFile(),
+                    encoding: .utf8
+                )?
+                    .trimmingCharacters(in: .whitespacesAndNewlines) ?? "-"
+                logger.log(
+                    "Ghostty single-instance launch exited with code \(process.terminationStatus): \(errorText). Using open fallback."
+                )
+                return false
+            }
             return true
         } catch {
             logger.log("Ghostty single-instance launch failed (\(error.localizedDescription)); using open fallback.")
