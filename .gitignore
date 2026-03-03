@@ -4,6 +4,7 @@
 # Swift Package Manager
 .build/
 .swiftpm/
+.clang-module-cache/
 Package.resolved
 
 # Xcode / Derived data (even without an .xcodeproj, tools may generate these)
