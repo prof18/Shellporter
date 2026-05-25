@@ -5,6 +5,22 @@
         <description>Shellporter release feed</description>
         <language>en</language>
         <item>
+            <title>0.1.3</title>
+            <pubDate>Mon, 25 May 2026 11:36:34 +0200</pubDate>
+            <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
+            <sparkle:version>4</sparkle:version>
+            <sparkle:shortVersionString>0.1.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h2>Shellporter 0.1.3</h2>
+<ul>
+<li>Open Ghostty new-window launches through Ghostty 1.3+ AppleScript support so new windows stay in the existing app instance without an extra Dock icon</li>
+<li>Keep a compatibility fallback for older Ghostty versions or disabled AppleScript support</li>
+</ul>
+<p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
+]]></description>
+            <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.3/Shellporter-0.1.3.zip" length="2416480" type="application/octet-stream" sparkle:edSignature="P2e+Fv47e/Hn90Mi4oclCHgrFJQBjEUL4wnQUkc/Fx//xtqg4HmXSe7VM9nkWFWil3nx/EVVVPPVYkjrtB1IDQ=="/>
+        </item>
+        <item>
             <title>0.1.2</title>
             <pubDate>Tue, 03 Mar 2026 13:15:16 +0100</pubDate>
             <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
@@ -34,28 +50,6 @@
 <p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
 ]]></description>
             <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.1/Shellporter-0.1.1.zip" length="2417373" type="application/octet-stream" sparkle:edSignature="9lCv+DM7YY7MAEHhIzZEvN7qv9jt429e7dMmhanpw+Fk6Hod+93yAB/YHFTyzPS/vaA6SDnXPKVUf16J+aNHBA=="/>
-        </item>
-        <item>
-            <title>0.1.0</title>
-            <pubDate>Thu, 12 Feb 2026 22:32:17 +0100</pubDate>
-            <link>https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml</link>
-            <sparkle:version>1</sparkle:version>
-            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h2>Shellporter 0.1.0</h2>
-<ul>
-<li>Initial release</li>
-<li>Open a terminal in the active IDE project folder with a global hotkey</li>
-<li>IDE support: JetBrains family, Android Studio, VS Code, VSCodium, Cursor, Xcode</li>
-<li>Terminal support: Terminal.app, iTerm2, Kitty, Ghostty, custom command</li>
-<li>Smart project path resolution via accessibility, title heuristics, and IDE recents</li>
-<li>Global shortcuts for opening terminal and copying <code>cd</code> command</li>
-<li>Menu bar app with preferences for terminal selection, hotkey customization, and diagnostics</li>
-<li>Auto-update support via Sparkle</li>
-</ul>
-<p><a href="https://github.com/prof18/shellporter/blob/main/CHANGELOG.md">View full changelog</a></p>
-]]></description>
-            <enclosure url="https://github.com/prof18/shellporter/releases/download/v0.1.0/Shellporter-0.1.0.zip" length="2404375" type="application/octet-stream" sparkle:edSignature="fgokE2PheXU3sJQWp58EZcuBqzQg/u9HBgNdm87ZeVQrlYR9TzzprPdJg/XwmAet/kr11cfTgZ3B/KAYzgLIBQ=="/>
         </item>
     </channel>
 </rss>
