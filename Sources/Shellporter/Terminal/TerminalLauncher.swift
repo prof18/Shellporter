@@ -15,8 +15,10 @@ enum TerminalLauncherError: LocalizedError {
 ///
 /// - **Terminal.app / iTerm2**: AppleScript via `osascript` (slow but reliable; the only way to
 ///   script these apps). iTerm2 additionally supports session reuse via name-based markers.
-/// - **Kitty / Ghostty**: CLI binary launch (fast, no AppleScript). Searches known install paths
+/// - **Kitty**: CLI binary launch (fast, no AppleScript). Searches known install paths
 ///   and falls back to `open -a` if the binary isn't found.
+/// - **Ghostty**: AppleScript for explicit new-window requests on Ghostty 1.3+; CLI/open
+///   fallback for older versions or scripting failures.
 /// - **Custom**: User-provided shell command template with `{path}` substitution.
 final class TerminalLauncher {
     private let logger: Logger
@@ -48,7 +50,11 @@ final class TerminalLauncher {
         switch choice {
         case .ghostty:
             if config.ghosttyOpenNewWindow {
-                // New window (separate Space); may show an extra dock icon per window.
+                if launchGhosttyNewWindow(path: path) {
+                    break
+                }
+                // Older Ghostty versions or disabled AppleScript support need a separate app instance.
+                // This can show an extra dock icon, but preserves the "new window" preference.
                 try launchProcess(
                     executable: "/usr/bin/open",
                     arguments: ["-na", "Ghostty", "--args", "--working-directory=\(path.path)"]
@@ -151,6 +157,31 @@ final class TerminalLauncher {
             logger.log("Ghostty single-instance launch failed (\(error.localizedDescription)); using open fallback.")
             return false
         }
+    }
+
+    /// Ghostty 1.3+ exposes a macOS AppleScript API that can create a new window inside the
+    /// existing app instance. That avoids the extra Dock icon caused by `open -na`.
+    private func launchGhosttyNewWindow(path: URL) -> Bool {
+        do {
+            try runAppleScriptIgnoringOutput(Self.ghosttyNewWindowScript(path: path))
+            return true
+        } catch {
+            logger.log("Ghostty AppleScript new-window launch failed (\(error.localizedDescription)); using open fallback.")
+            return false
+        }
+    }
+
+    static func ghosttyNewWindowScript(path: URL) -> [String] {
+        let escapedPath = path.path.appleScriptEscaped()
+        return [
+            "tell application \"Ghostty\"",
+            "activate",
+            "set shellporterConfig to new surface configuration",
+            "set initial working directory of shellporterConfig to \"\(escapedPath)\"",
+            "set shellporterWindow to new window with configuration shellporterConfig",
+            "activate window shellporterWindow",
+            "end tell",
+        ]
     }
 
     private func launchTerminalApp(path: URL) throws {

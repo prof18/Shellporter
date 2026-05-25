@@ -137,3 +137,33 @@ func terminalLaunchScript_coldStartTargetsFirstWindow() {
         ]
     )
 }
+
+// MARK: - Ghostty launch script
+
+@Test
+func ghosttyNewWindowScript_setsInitialWorkingDirectory() {
+    let path = URL(fileURLWithPath: "/Users/test/My Project")
+
+    #expect(
+        TerminalLauncher.ghosttyNewWindowScript(path: path) == [
+            "tell application \"Ghostty\"",
+            "activate",
+            "set shellporterConfig to new surface configuration",
+            "set initial working directory of shellporterConfig to \"/Users/test/My Project\"",
+            "set shellporterWindow to new window with configuration shellporterConfig",
+            "activate window shellporterWindow",
+            "end tell",
+        ]
+    )
+}
+
+@Test
+func ghosttyNewWindowScript_escapesAppleScriptString() {
+    let path = URL(fileURLWithPath: "/Users/test/Project \"A\"/back\\slash")
+
+    #expect(
+        TerminalLauncher.ghosttyNewWindowScript(path: path).contains(
+            "set initial working directory of shellporterConfig to \"/Users/test/Project \\\"A\\\"/back\\\\slash\""
+        )
+    )
+}

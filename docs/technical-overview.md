@@ -221,7 +221,7 @@ CLI-based single-instance launch: `kitty --single-instance --directory=<path>`. 
 ### Ghostty
 Two modes controlled by `ghosttyOpenNewWindow` config:
 - **Single instance** (default): Tries `ghostty +new-window --working-directory=<path>` (Kitty-style CLI, one dock icon). Falls back to `open -a Ghostty <path>` (new tab in existing instance).
-- **New window**: Uses `open -na Ghostty --args --working-directory=<path>` (separate process, may show extra dock icon).
+- **New window**: Uses Ghostty 1.3+'s AppleScript API to create a new window with the project as its initial working directory inside the existing app instance. If AppleScript is unavailable or disabled, falls back to `open -na Ghostty --args --working-directory=<path>` (separate process, may show an extra dock icon).
 
 Note: Ghostty's macOS CLI support for `+new-window` / `--working-directory` is not fully stable yet (ghostty-org/ghostty#2353).
 
@@ -408,7 +408,7 @@ Read from `version.env` at project root (if present), otherwise defaults to `0.1
 
 7. **iTerm2 session reuse**: Sessions are tagged with `shellporter:<standardized path>`. On re-invocation, Shellporter iterates all iTerm2 windows/tabs/sessions via AppleScript to find and select the matching session rather than creating a duplicate.
 
-8. **Ghostty dual mode**: The `ghosttyOpenNewWindow` config controls whether Ghostty opens in the same instance (one dock icon, Kitty-style CLI) or spawns a new process (`open -na`, separate dock icon per window). The CLI path is experimental on macOS.
+8. **Ghostty dual mode**: The `ghosttyOpenNewWindow` config controls whether Ghostty may reuse an existing window as a tab, or explicitly creates a separate window. New-window mode prefers Ghostty's AppleScript API so the window stays in the existing app instance; `open -na` is only the compatibility fallback.
 
 9. **Cache dual-key strategy**: Every successful resolution writes two cache entries: one keyed by window title (for precise recall) and one keyed by `|last` (for when the title changes or is empty). This means the cache can serve both "same project, same window" and "same app, any window" lookups.
 

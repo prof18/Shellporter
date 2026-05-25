@@ -23,8 +23,8 @@
 "settings-launch-at-login" = "Launch at Login";
 "settings-section-default-terminal" = "Default Terminal";
 "settings-field-terminal" = "Terminal";
-"settings-ghostty-open-new-window" = "Open in new window (separate Space)";
-"settings-ghostty-open-new-window-hint" = "When on, each shortcut opens a new Ghostty window that can stay on another Space. May show an extra dock icon per window. When off, the new tab opens in the instance macOS selects (usually the frontmost) if you have multiple Ghostty instances.";
+"settings-ghostty-open-new-window" = "Open in new Ghostty window";
+"settings-ghostty-open-new-window-hint" = "When on, each shortcut opens a separate Ghostty window. Ghostty 1.3 or newer uses the existing app instance, so no extra Dock icon; older versions fall back to a separate instance. When off, Ghostty may open a new tab in an existing window.";
 "settings-section-custom-terminal-command" = "Custom Terminal Command";
 "settings-custom-command-description" = "A custom command to run instead of the built-in terminal launchers.";
 "settings-field-template" = "Template";
