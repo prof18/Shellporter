@@ -81,7 +81,7 @@ enum TerminalChoice: String, Codable, CaseIterable, Identifiable {
 struct AppConfig: Codable, Equatable {
     var defaultTerminal: TerminalChoice
     var customCommandTemplate: String
-    /// When true, Ghostty opens a new window (separate Space); may show an extra dock icon per window.
+    /// When true, Ghostty opens a new window instead of reusing an existing window as a tab.
     var ghosttyOpenNewWindow: Bool
     var hotkeyKeyCode: UInt32
     var hotkeyModifiers: UInt32

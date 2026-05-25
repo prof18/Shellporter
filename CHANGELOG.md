@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Open Ghostty new-window launches through Ghostty 1.3+ AppleScript support so new windows stay in the existing app instance without an extra Dock icon
+- Keep a compatibility fallback for older Ghostty versions or disabled AppleScript support
+
 ## 0.1.2
 
 - Fix Ghostty launch fallback when macOS CLI `+new-window` exits with an error

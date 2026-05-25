@@ -53,7 +53,7 @@ But I'm lazy, and having to open a new terminal window and navigate to the proje
 
 - Terminal.app
 - iTerm2 (with session reuse — re-invocation selects the existing tab instead of opening a duplicate)
-- Ghostty (single-instance or new-window mode). Note: Ghostty's macOS CLI support for `+new-window` / `--working-directory` is [not fully stable yet](https://github.com/ghostty-org/ghostty/issues/2353), so Shellporter falls back to `open -a`, which may show an extra dock icon per window
+- Ghostty (single-instance or new-window mode). Ghostty 1.3+ uses AppleScript for new windows inside the existing app instance; older versions fall back to `open -na`
 - Kitty (single-instance mode)
 - Custom command (any terminal via a user-provided shell command template)
 
@@ -121,4 +121,3 @@ You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 ```
-
