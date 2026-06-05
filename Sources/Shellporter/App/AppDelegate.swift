@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let sparkleUpdater = SparkleUpdater()
     let openHotKeyManager = HotKeyManager(signature: "SHPO", id: 1)
     let copyCommandHotKeyManager = HotKeyManager(signature: "SHPC", id: 1)
+    let buildInfo = AppBuildInfo.current()
 
     var statusItem: NSStatusItem?
     var settingsWindowController: NSWindowController?
@@ -26,7 +27,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Shellporter may already be frontmost (e.g. menu was open), so we need to
     /// remember which IDE to resolve against. Updated via workspace notifications.
     var lastKnownExternalApp: NSRunningApplication?
-    let shellporterBundleIdentifier = Bundle.main.bundleIdentifier ?? "com.prof18.shellporter"
+    var shellporterBundleIdentifier: String { buildInfo.bundleIdentifier }
     let preferencesMinSize = NSSize(width: 720, height: 620)
     let preferencesDefaultSize = NSSize(width: 780, height: 700)
     let aboutWindowSize = NSSize(width: 600, height: 620)

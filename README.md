@@ -102,6 +102,9 @@ Requires Swift 6.2+ and macOS 14+.
 # Build and run (dev loop)
 ./Scripts/compile_and_run.sh
 
+# Build and run as Shellporter Dev.app alongside Shellporter.app
+./Scripts/compile_and_run.sh --dev
+
 # Build and run with tests
 ./Scripts/compile_and_run.sh --test
 

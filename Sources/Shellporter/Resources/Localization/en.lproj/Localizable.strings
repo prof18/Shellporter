@@ -1,22 +1,22 @@
 "terminals-custom-command" = "Custom Command";
 
+"menu-dev-build-indicator" = "Shellporter Dev Build";
 "menu-accessibility-missing" = "Accessibility: Missing";
 "menu-request-accessibility-permission" = "Request Accessibility Permission";
 "menu-open-accessibility-settings" = "Open Accessibility Settings";
-"menu-open-terminal-in-current-project" = "Open Terminal in Current Project";
-"menu-focus-terminal-copy-command" = "Focus Terminal + Copy Command";
-"menu-focus-terminal-copy-command-hint" = "Paste it to navigate to this project folder.";
-"menu-open-with" = "Open With";
+"menu-open-terminal-in-current-project" = "Open Terminal in Active Project";
+"menu-focus-terminal-copy-command" = "Focus Terminal and Copy cd Command";
+"menu-open-with" = "Open Active Project With";
 "menu-about-shellporter" = "About Shellporter";
-"menu-preferences" = "Settings";
-"menu-check-for-updates" = "Check for Updates";
-"menu-quit-shellporter" = "Quit";
+"menu-preferences" = "Settings…";
+"menu-check-for-updates" = "Check for Updates…";
+"menu-quit-shellporter" = "Quit Shellporter";
 
 "about-description" = "Shellporter opens your terminal directly in the project folder of the currently active IDE window.";
 "about-version-format" = "Version %@ (%@)";
 "about-link-github" = "GitHub";
 "about-link-website" = "Website";
-"about-check-for-updates" = "Check for Updates";
+"about-check-for-updates" = "Check for Updates…";
 "about-copyright" = "Copyright © 2026 Marco Gomiero. All rights reserved.";
 
 "settings-section-general" = "General";
@@ -38,11 +38,11 @@
 "settings-accessibility-refresh-status" = "Refresh Status";
 "settings-accessibility-hint" = "Shellporter needs Accessibility permission to read the active IDE window and resolve the project path.";
 "settings-section-global-shortcuts" = "Global Shortcuts";
-"settings-open-terminal-shortcut" = "Open Terminal shortcut";
-"settings-focus-terminal-copy-shortcut" = "Focus Terminal + Copy project command shortcut";
+"settings-open-terminal-shortcut" = "Open Terminal in active project";
+"settings-focus-terminal-copy-shortcut" = "Focus Terminal and copy cd command";
 "settings-cancel" = "Cancel";
 "settings-reset-default" = "Reset Default";
-"settings-focus-terminal-copy-hint" = "Brings Terminal to the front (or opens it if needed) and copies a command you can paste to jump into the current project folder.";
+"settings-focus-terminal-copy-hint" = "Brings Terminal to the front (or opens it if needed), then copies a command you can paste to switch to the active project folder.";
 "settings-hotkey-capture-hint" = "Record a shortcut using at least one modifier key. Changes are saved immediately.";
 "settings-section-diagnostics" = "Diagnostics";
 "settings-copy-last-resolution-diagnostics" = "Copy Last Resolution Diagnostics";
@@ -53,7 +53,7 @@
 "settings-record-shortcut" = "Record Shortcut";
 
 "alerts-project-path-not-found-title" = "Project Path Not Found";
-"alerts-project-path-not-found-message" = "Shellporter could not resolve the current project path to copy a cd command.";
+"alerts-project-path-not-found-message" = "Shellporter could not resolve the active project path to copy a cd command.";
 "alerts-failed-to-launch-terminal-title" = "Failed to Launch Terminal";
 "alerts-select-project-folder-title" = "Select Project Folder";
 "alerts-select-project-folder-message" = "Shellporter could not resolve the focused project path. Select a folder manually.";
@@ -69,8 +69,11 @@
 "window-about-title" = "About";
 
 "status-bar-fallback-title" = "SP";
+"status-bar-dev-title" = "DEV";
 "status-bar-tooltip-default" = "Shellporter";
+"status-bar-tooltip-dev" = "Shellporter Dev Build";
 "status-bar-tooltip-accessibility-missing" = "Shellporter (Accessibility permission missing)";
+"status-bar-tooltip-dev-accessibility-missing" = "Shellporter Dev Build (Accessibility permission missing)";
 "status-bar-symbol-accessibility-description" = "Shellporter";
 
 "terminal-launcher-invalid-custom-command" = "Custom command template is empty.";

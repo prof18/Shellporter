@@ -10,8 +10,8 @@ macOS menu bar utility that opens a terminal in the active IDE's project directo
 - `docs`: release notes and process docs.
 
 ## Build, Test, Run
-- Dev loop: `./Scripts/compile_and_run.sh` — kills old instance, builds, packages `.app`, relaunches.
-- With tests: `./Scripts/compile_and_run.sh --test`
+- Dev loop: `./Scripts/compile_and_run.sh --dev` - kills old dev instance, builds, packages `Shellporter Dev.app`, relaunches.
+- With tests: `./Scripts/compile_and_run.sh --dev --test`
 - Quick build/test: `swift build` / `swift test`
 - Universal release: `./Scripts/compile_and_run.sh --release-universal`
 - Signing setup: `./Scripts/setup_dev_signing.sh`
@@ -24,7 +24,7 @@ macOS menu bar utility that opens a terminal in the active IDE's project directo
 ## Testing Guidelines
 - Use Swift Testing framework (`import Testing`, `@Test`, `#expect`). Tests touching `@MainActor` types: `@Test @MainActor`.
 - Always run `swift test` before handoff.
-- After code changes affecting the app, rebuild and relaunch with `./Scripts/compile_and_run.sh` to validate.
+- After code changes affecting the app, rebuild and relaunch the dev app with `./Scripts/compile_and_run.sh --dev` to validate.
 
 ## Release Flow
 1. Bump `version.env` (MARKETING_VERSION + BUILD_NUMBER)
@@ -37,5 +37,5 @@ macOS menu bar utility that opens a terminal in the active IDE's project directo
 
 ## Agent Notes
 - Use SwiftPM and provided scripts; avoid adding dependencies without confirmation.
-- After any code edit, rebuild with `./Scripts/compile_and_run.sh` before validating behavior.
+- After any code edit, rebuild with `./Scripts/compile_and_run.sh --dev` before validating behavior.
 - Prefer modern SwiftUI/Observation macros (`@Observable`, `@State`, `@Bindable`); avoid `ObservableObject`/`@ObservedObject`/`@StateObject`.

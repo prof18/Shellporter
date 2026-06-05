@@ -10,6 +10,8 @@ if [[ -f "$ROOT/.env" ]]; then
 fi
 
 APP_NAME=${APP_NAME:-Shellporter}
+PRODUCT_NAME=${PRODUCT_NAME:-Shellporter}
+EXECUTABLE_NAME=${EXECUTABLE_NAME:-$APP_NAME}
 BUNDLE_ID=${BUNDLE_ID:-com.prof18.shellporter}
 MACOS_MIN_VERSION=${MACOS_MIN_VERSION:-14.0}
 MENU_BAR_APP=${MENU_BAR_APP:-0}
@@ -64,7 +66,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleName</key><string>${APP_NAME}</string>
     <key>CFBundleDisplayName</key><string>${APP_NAME}</string>
     <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
-    <key>CFBundleExecutable</key><string>${APP_NAME}</string>
+    <key>CFBundleExecutable</key><string>${EXECUTABLE_NAME}</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>${MARKETING_VERSION}</string>
     <key>CFBundleVersion</key><string>${BUILD_NUMBER}</string>
@@ -131,16 +133,16 @@ install_binary() {
   verify_binary_arches "$dest" "${ARCH_LIST[@]}"
 }
 
-install_binary "$APP_NAME" "$APP/Contents/MacOS/$APP_NAME"
+install_binary "$PRODUCT_NAME" "$APP/Contents/MacOS/$EXECUTABLE_NAME"
 
 # Bundle app resources (if any).
-APP_RESOURCES_DIR="$ROOT/Sources/$APP_NAME/Resources"
+APP_RESOURCES_DIR="$ROOT/Sources/$PRODUCT_NAME/Resources"
 if [[ -d "$APP_RESOURCES_DIR" ]]; then
   cp -R "$APP_RESOURCES_DIR/." "$APP/Contents/Resources/"
 fi
 
 # SwiftPM resource bundles are emitted next to the built binary.
-PREFERRED_BUILD_DIR="$(dirname "$(build_product_path "$APP_NAME" "${ARCH_LIST[0]}")")"
+PREFERRED_BUILD_DIR="$(dirname "$(build_product_path "$PRODUCT_NAME" "${ARCH_LIST[0]}")")"
 shopt -s nullglob
 SWIFTPM_BUNDLES=("${PREFERRED_BUILD_DIR}/"*.bundle)
 shopt -u nullglob

@@ -349,6 +349,9 @@ Cached paths are validated against the filesystem before use:
 # Quick build + run
 ./Scripts/compile_and_run.sh
 
+# Run Shellporter Dev.app alongside Shellporter.app
+./Scripts/compile_and_run.sh --dev
+
 # With tests
 ./Scripts/compile_and_run.sh --test
 
@@ -357,7 +360,7 @@ Cached paths are validated against the filesystem before use:
 ```
 
 `compile_and_run.sh`:
-1. Kills any running Shellporter instances
+1. Kills the targeted Shellporter app variant
 2. Optionally runs `swift test`
 3. Detects a stable signing identity ("Shellporter Development") or falls back to ad-hoc
 4. Calls `package_app.sh release`

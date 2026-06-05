@@ -13,13 +13,19 @@ extension AppDelegate {
         guard let button = statusItem?.button else { return }
         if let image = statusBarImage(missingPermission: !accessibilityPermissionGranted) {
             button.image = image
-            button.title = ""
+            button.title = buildInfo.isDevBuild ? " \(AppStrings.StatusBar.devTitle)" : ""
         } else {
             button.image = nil
-            button.title = AppStrings.StatusBar.fallbackTitle
+            button.title = buildInfo.isDevBuild
+                ? "\(AppStrings.StatusBar.fallbackTitle) \(AppStrings.StatusBar.devTitle)"
+                : AppStrings.StatusBar.fallbackTitle
         }
 
-        if accessibilityPermissionGranted {
+        if buildInfo.isDevBuild {
+            button.toolTip = accessibilityPermissionGranted
+                ? AppStrings.StatusBar.tooltipDev
+                : AppStrings.StatusBar.tooltipDevAccessibilityMissing
+        } else if accessibilityPermissionGranted {
             button.toolTip = AppStrings.StatusBar.tooltipDefault
         } else {
             button.toolTip = AppStrings.StatusBar.tooltipAccessibilityMissing

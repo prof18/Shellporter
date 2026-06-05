@@ -8,12 +8,12 @@ enum AppStrings {
 
     // MARK: - Menu
     enum Menu {
+        static let devBuildIndicator = Localization.localized("menu-dev-build-indicator")
         static let accessibilityMissing = Localization.localized("menu-accessibility-missing")
         static let requestAccessibilityPermission = Localization.localized("menu-request-accessibility-permission")
         static let openAccessibilitySettings = Localization.localized("menu-open-accessibility-settings")
         static let openTerminalInCurrentProject = Localization.localized("menu-open-terminal-in-current-project")
         static let focusTerminalAndCopyCommand = Localization.localized("menu-focus-terminal-copy-command")
-        static let focusTerminalAndCopyCommandHint = Localization.localized("menu-focus-terminal-copy-command-hint")
         static let openWith = Localization.localized("menu-open-with")
         static let aboutShellporter = Localization.localized("menu-about-shellporter")
         static let preferences = Localization.localized("menu-preferences")
@@ -97,8 +97,11 @@ enum AppStrings {
     // MARK: - Status Bar
     enum StatusBar {
         static let fallbackTitle = Localization.localized("status-bar-fallback-title")
+        static let devTitle = Localization.localized("status-bar-dev-title")
         static let tooltipDefault = Localization.localized("status-bar-tooltip-default")
+        static let tooltipDev = Localization.localized("status-bar-tooltip-dev")
         static let tooltipAccessibilityMissing = Localization.localized("status-bar-tooltip-accessibility-missing")
+        static let tooltipDevAccessibilityMissing = Localization.localized("status-bar-tooltip-dev-accessibility-missing")
         static let symbolAccessibilityDescription = Localization.localized("status-bar-symbol-accessibility-description")
     }
 

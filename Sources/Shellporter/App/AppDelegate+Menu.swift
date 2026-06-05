@@ -7,6 +7,11 @@ extension AppDelegate {
 
         let menu = NSMenu()
 
+        if buildInfo.isDevBuild {
+            menu.addItem(makeDevBuildIndicatorItem())
+            menu.addItem(.separator())
+        }
+
         if !accessibilityPermissionGranted {
             let accessibilityStatus = NSMenuItem(
                 title: AppStrings.Menu.accessibilityMissing,
@@ -55,11 +60,6 @@ extension AppDelegate {
             fromCarbonModifiers: configStore.config.copyCommandHotkeyModifiers
         )
         menu.addItem(copyItem)
-        menu.addItem(
-            makeMenuHintItem(
-                text: AppStrings.Menu.focusTerminalAndCopyCommandHint
-            )
-        )
 
         let openWithItem = NSMenuItem(title: AppStrings.Menu.openWith, action: nil, keyEquivalent: "")
         openWithItem.submenu = makeOpenWithMenu()
@@ -112,13 +112,16 @@ extension AppDelegate {
         return submenu
     }
 
-    private func makeMenuHintItem(text hintText: String) -> NSMenuItem {
+    private func makeDevBuildIndicatorItem() -> NSMenuItem {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.systemFont(ofSize: 11),
-            .foregroundColor: NSColor.secondaryLabelColor,
+            .font: NSFont.boldSystemFont(ofSize: 12),
+            .foregroundColor: NSColor.systemOrange,
         ]
-        let item = NSMenuItem(title: hintText, action: nil, keyEquivalent: "")
-        item.attributedTitle = NSAttributedString(string: hintText, attributes: attributes)
+        let item = NSMenuItem(title: AppStrings.Menu.devBuildIndicator, action: nil, keyEquivalent: "")
+        item.attributedTitle = NSAttributedString(
+            string: AppStrings.Menu.devBuildIndicator,
+            attributes: attributes
+        )
         item.isEnabled = false
         return item
     }
