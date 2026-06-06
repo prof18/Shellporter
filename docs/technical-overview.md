@@ -213,7 +213,7 @@ Each terminal type has distinct launch mechanics:
 AppleScript via `osascript`. If Terminal is already running, opens a new tab (`do script "cd ..."`). If not, waits up to 2 seconds for the window to appear, then runs the command.
 
 ### iTerm2
-AppleScript with **session reuse**. Sessions are named with a marker (`shellporter:<path>`). On subsequent invocations for the same path, Shellporter scans all iTerm2 windows/tabs/sessions for a matching marker and selects it instead of creating a new tab.
+AppleScript with **session reuse**. Sessions are named with a marker (`shellporter:<path>`). On subsequent invocations for the same path, Shellporter scans all iTerm2 windows/tabs/sessions for a matching marker and selects it instead of creating a duplicate. If no matching session exists, `iTerm2OpenNewWindow` controls whether Shellporter opens a dedicated window or a new tab.
 
 ### Kitty
 CLI-based single-instance launch: `kitty --single-instance --directory=<path>`. Searches for the binary in `/Applications/kitty.app/Contents/MacOS/kitty`, `/opt/homebrew/bin/kitty`, `/usr/local/bin/kitty`, `/usr/bin/kitty`. Falls back to `open -a kitty` if the binary isn't found.
@@ -409,7 +409,7 @@ Read from `version.env` at project root (if present), otherwise defaults to `0.1
 
 6. **Xcode bundle normalization**: If the resolved path ends in `.xcodeproj` or `.xcworkspace`, the normalizer strips it to the parent directory. Without this, the terminal would open inside the Xcode bundle (which is a directory).
 
-7. **iTerm2 session reuse**: Sessions are tagged with `shellporter:<standardized path>`. On re-invocation, Shellporter iterates all iTerm2 windows/tabs/sessions via AppleScript to find and select the matching session rather than creating a duplicate.
+7. **iTerm2 session reuse**: Sessions are tagged with `shellporter:<standardized path>`. On re-invocation, Shellporter iterates all iTerm2 windows/tabs/sessions via AppleScript to find and select the matching session rather than creating a duplicate. New unmatched launches use the configured iTerm2 window/tab preference.
 
 8. **Ghostty dual mode**: The `ghosttyOpenNewWindow` config controls whether Ghostty may reuse an existing window as a tab, or explicitly creates a separate window. New-window mode prefers Ghostty's AppleScript API so the window stays in the existing app instance; `open -na` is only the compatibility fallback.
 
