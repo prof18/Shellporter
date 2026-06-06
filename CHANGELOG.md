@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.4
+
+- Show only installed terminals in settings and the Open With menu
+- Improve iTerm launch compatibility across installed app variants
+- Keep Ghostty launches on the current Space when opening new windows
+- Refresh settings window layout, menu copy, and website documentation for the current terminal behavior
+
 ## 0.1.3
 
 - Open Ghostty new-window launches through Ghostty 1.3+ AppleScript support so new windows stay in the existing app instance without an extra Dock icon
