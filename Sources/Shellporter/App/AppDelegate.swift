@@ -28,8 +28,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// remember which IDE to resolve against. Updated via workspace notifications.
     var lastKnownExternalApp: NSRunningApplication?
     var shellporterBundleIdentifier: String { buildInfo.bundleIdentifier }
-    let preferencesMinSize = NSSize(width: 720, height: 620)
-    let preferencesDefaultSize = NSSize(width: 780, height: 700)
+    let preferencesMinSize = NSSize(width: 640, height: 600)
+    let preferencesDefaultSize = NSSize(width: 720, height: 680)
     let aboutWindowSize = NSSize(width: 600, height: 620)
     let onboardingSize = NSSize(width: 480, height: 380)
     let menuBarIconSize = NSSize(width: 18, height: 18)

@@ -37,6 +37,7 @@ enum AppStrings {
     enum Settings {
         static let sectionGeneral = Localization.localized("settings-section-general")
         static let launchAtLogin = Localization.localized("settings-launch-at-login")
+        static let sectionTerminal = Localization.localized("settings-section-terminal")
         static let sectionDefaultTerminal = Localization.localized("settings-section-default-terminal")
         static let fieldTerminal = Localization.localized("settings-field-terminal")
         static let ghosttyOpenNewWindow = Localization.localized("settings-ghostty-open-new-window")
@@ -50,6 +51,8 @@ enum AppStrings {
         static let accessibilityStatus = Localization.localized("settings-accessibility-status")
         static let accessibilityGranted = Localization.localized("settings-accessibility-granted")
         static let accessibilityMissing = Localization.localized("settings-accessibility-missing")
+        static let accessibilityMissingCalloutTitle = Localization.localized("settings-accessibility-missing-callout-title")
+        static let accessibilityMissingCalloutMessage = Localization.localized("settings-accessibility-missing-callout-message")
         static let accessibilityOpenSettings = Localization.localized("settings-accessibility-open-settings")
         static let accessibilityRefreshStatus = Localization.localized("settings-accessibility-refresh-status")
         static let accessibilityHint = Localization.localized("settings-accessibility-hint")
