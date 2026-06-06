@@ -175,7 +175,7 @@ final class TerminalLauncher {
         let escapedPath = path.path.appleScriptEscaped()
         return [
             "tell application \"Ghostty\"",
-            "activate",
+            "launch",
             "set shellporterConfig to new surface configuration",
             "set initial working directory of shellporterConfig to \"\(escapedPath)\"",
             "set shellporterWindow to new window with configuration shellporterConfig",

@@ -147,7 +147,7 @@ func ghosttyNewWindowScript_setsInitialWorkingDirectory() {
     #expect(
         TerminalLauncher.ghosttyNewWindowScript(path: path) == [
             "tell application \"Ghostty\"",
-            "activate",
+            "launch",
             "set shellporterConfig to new surface configuration",
             "set initial working directory of shellporterConfig to \"/Users/test/My Project\"",
             "set shellporterWindow to new window with configuration shellporterConfig",
