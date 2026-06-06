@@ -2,6 +2,8 @@
 
 A macOS menu bar utility that opens a terminal in the project directory of the active IDE window — with a single hotkey press.
 
+[Website](https://shellporter.com) · [Releases](https://github.com/prof18/shellporter/releases)
+
 <p align="center">
   <img src="docs/images/menu-bar.png" alt="Shellporter menu bar" width="480">
 </p>
@@ -39,7 +41,7 @@ But I'm lazy, and having to open a new terminal window and navigate to the proje
 - Second hotkey (`Ctrl+Opt+Cmd+C` (`^⌥⌘C`)) to copy the `cd` command to the clipboard
 - Automatic project directory detection via Accessibility APIs, window titles, and IDE metadata files
 - Resolution cache for instant recall even when live strategies fail
-- Configurable hotkeys and terminal preference
+- Configurable hotkeys, terminal preference, and per-terminal launch behavior
 
 ### Supported IDEs
 
@@ -52,7 +54,7 @@ But I'm lazy, and having to open a new terminal window and navigate to the proje
 ### Supported Terminals
 
 - Terminal.app
-- iTerm2 (with session reuse — re-invocation selects the existing tab instead of opening a duplicate)
+- iTerm2 (with session reuse — re-invocation selects an existing session instead of opening a duplicate; new unmatched launches can use windows or tabs)
 - Ghostty (single-instance or new-window mode). Ghostty 1.3+ uses AppleScript for new windows inside the existing app instance; older versions fall back to `open -na`
 - Kitty (single-instance mode)
 - Custom command (any terminal via a user-provided shell command template)
