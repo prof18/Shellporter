@@ -11,6 +11,7 @@ struct SettingsView: View {
     @ObservedObject var viewModel: SettingsViewModel
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var accessibilityGranted = AXWindowInspector.isAccessibilityTrusted()
+    @State private var availableTerminalChoices = SystemTerminalDetector.availableTerminalChoices()
     @State private var recordingTarget: ShortcutRecordingTarget?
     @State private var hotkeyCaptureMonitor: Any?
     @State private var hotkeyCaptureMessage: String?
@@ -38,6 +39,13 @@ struct SettingsView: View {
         .frame(minWidth: 640, minHeight: 600)
         .onAppear {
             refreshAccessibilityStatus()
+            refreshAvailableTerminalChoices()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            refreshAvailableTerminalChoices()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { _ in
+            refreshAvailableTerminalChoices()
         }
         .onDisappear {
             stopHotkeyCapture()
@@ -101,7 +109,7 @@ struct SettingsView: View {
         SettingsSection(AppStrings.Settings.sectionTerminal) {
             SettingsRow(title: AppStrings.Settings.fieldTerminal) {
                 Picker("", selection: $viewModel.config.defaultTerminal) {
-                    ForEach(TerminalChoice.allCases) { terminal in
+                    ForEach(availableTerminalChoices) { terminal in
                         Text(terminal.displayName).tag(terminal)
                     }
                 }
@@ -300,6 +308,16 @@ struct SettingsView: View {
 
     private func refreshAccessibilityStatus() {
         accessibilityGranted = AXWindowInspector.isAccessibilityTrusted()
+    }
+
+    private func refreshAvailableTerminalChoices() {
+        let choices = SystemTerminalDetector.availableTerminalChoices()
+        availableTerminalChoices = choices
+        guard !choices.contains(viewModel.config.defaultTerminal),
+              let fallback = choices.first else {
+            return
+        }
+        viewModel.config.defaultTerminal = fallback
     }
 
     private func openAccessibilitySettings() {

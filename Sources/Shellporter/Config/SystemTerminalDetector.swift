@@ -31,4 +31,12 @@ enum SystemTerminalDetector {
         }
         return NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) != nil
     }
+
+    static func availableTerminalChoices() -> [TerminalChoice] {
+        TerminalChoice.availableChoices(isInstalled: isInstalled)
+    }
+
+    static func availableTerminalAppChoices() -> [TerminalChoice] {
+        TerminalChoice.availableAppChoices(isInstalled: isInstalled)
+    }
 }

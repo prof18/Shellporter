@@ -71,6 +71,16 @@ enum TerminalChoice: String, Codable, CaseIterable, Identifiable {
             return "open -a Terminal {path}"
         }
     }
+
+    static func availableChoices(isInstalled: (TerminalChoice) -> Bool) -> [TerminalChoice] {
+        allCases.filter(isInstalled)
+    }
+
+    static func availableAppChoices(isInstalled: (TerminalChoice) -> Bool) -> [TerminalChoice] {
+        allCases.filter { terminal in
+            terminal.bundleIdentifier != nil && isInstalled(terminal)
+        }
+    }
 }
 
 /// Persisted as `~/Library/Application Support/Shellporter/config.json`.

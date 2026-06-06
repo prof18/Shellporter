@@ -94,12 +94,14 @@ extension AppDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         if refreshAccessibilityPermissionStatus() {
             rebuildMenu()
+        } else {
+            menu.item(withTitle: AppStrings.Menu.openWith)?.submenu = makeOpenWithMenu()
         }
     }
 
     private func makeOpenWithMenu() -> NSMenu {
         let submenu = NSMenu()
-        for terminal in TerminalChoice.allCases {
+        for terminal in SystemTerminalDetector.availableTerminalAppChoices() {
             let item = NSMenuItem(
                 title: terminal.displayName,
                 action: #selector(openWithSelectedTerminal(_:)),
