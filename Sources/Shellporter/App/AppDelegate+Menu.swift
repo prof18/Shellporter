@@ -92,15 +92,29 @@ extension AppDelegate {
     }
 
     func menuWillOpen(_ menu: NSMenu) {
+        if menu.title == AppStrings.Menu.openWith {
+            populateOpenWithMenu(menu)
+            return
+        }
+
         if refreshAccessibilityPermissionStatus() {
             rebuildMenu()
         } else {
-            menu.item(withTitle: AppStrings.Menu.openWith)?.submenu = makeOpenWithMenu()
+            if let openWithMenu = menu.item(withTitle: AppStrings.Menu.openWith)?.submenu {
+                populateOpenWithMenu(openWithMenu)
+            }
         }
     }
 
     private func makeOpenWithMenu() -> NSMenu {
-        let submenu = NSMenu()
+        let submenu = NSMenu(title: AppStrings.Menu.openWith)
+        submenu.delegate = self
+        populateOpenWithMenu(submenu)
+        return submenu
+    }
+
+    private func populateOpenWithMenu(_ submenu: NSMenu) {
+        submenu.removeAllItems()
         for terminal in SystemTerminalDetector.availableTerminalAppChoices() {
             let item = NSMenuItem(
                 title: terminal.displayName,
@@ -111,7 +125,6 @@ extension AppDelegate {
             item.representedObject = terminal.rawValue
             submenu.addItem(item)
         }
-        return submenu
     }
 
     private func makeDevBuildIndicatorItem() -> NSMenuItem {
