@@ -129,6 +129,17 @@ struct SettingsView: View {
                 }
             }
 
+            if presentation.showsITerm2NewWindowOption {
+                SettingsDivider()
+                SettingsRow(
+                    title: AppStrings.Settings.iTerm2OpenNewWindow,
+                    subtitle: AppStrings.Settings.iTerm2OpenNewWindowHint
+                ) {
+                    Toggle("", isOn: $viewModel.config.iTerm2OpenNewWindow)
+                        .labelsHidden()
+                }
+            }
+
             if presentation.showsCustomCommandEditor {
                 SettingsDivider()
                 customCommandEditor

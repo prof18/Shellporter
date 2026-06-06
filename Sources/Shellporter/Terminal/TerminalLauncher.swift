@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 
 enum TerminalLauncherError: LocalizedError {
@@ -27,6 +28,7 @@ final class TerminalLauncher {
     /// iTerm2 sessions are tagged with this prefix + path. On re-invocation, we scan for a matching
     /// session and select it instead of creating a duplicate tab.
     private static let sessionTitlePrefix = "shellporter:"
+    private static let iTermBundleIdentifier = "com.googlecode.iterm2"
     private static let kittyExecutableCandidates = [
         "/Applications/kitty.app/Contents/MacOS/kitty",
         "/opt/homebrew/bin/kitty",
@@ -82,7 +84,7 @@ final class TerminalLauncher {
         case .terminal:
             try launchTerminalApp(path: path)
         case .iTerm2:
-            try launchITerm(path: path)
+            try launchITerm(path: path, config: config)
         case .custom:
             let template = config.customCommandTemplate.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !template.isEmpty else {
@@ -216,33 +218,119 @@ final class TerminalLauncher {
         ]
     }
 
-    private func launchITerm(path: URL) throws {
+    private func launchITerm(path: URL, config: AppConfig) throws {
         let marker = Self.sessionTitlePrefix + path.standardizedFileURL.path
-        if try reuseITermSession(marker: marker) {
+        let wasRunning = Self.isITermRunning()
+        if wasRunning, try reuseITermSession(marker: marker) {
             logger.log("Reused iTerm2 window for \(path.path)")
             return
         }
 
+        try runAppleScriptIgnoringOutput(
+            Self.iTermLaunchScript(
+                path: path,
+                marker: marker,
+                appWasRunning: wasRunning,
+                openNewWindow: config.iTerm2OpenNewWindow
+            )
+        )
+    }
+
+    static func iTermLaunchScript(path: URL) -> [String] {
+        iTermLaunchScript(path: path, appWasRunning: true, openNewWindow: true)
+    }
+
+    static func iTermLaunchScript(path: URL, appWasRunning: Bool, openNewWindow: Bool = true) -> [String] {
+        iTermLaunchScript(
+            path: path,
+            marker: Self.sessionTitlePrefix + path.standardizedFileURL.path,
+            appWasRunning: appWasRunning,
+            openNewWindow: openNewWindow
+        )
+    }
+
+    private static func iTermLaunchScript(
+        path: URL,
+        marker: String,
+        appWasRunning: Bool,
+        openNewWindow: Bool
+    ) -> [String] {
         let command = "cd \(path.path.shellEscapedForBash())"
-        try runAppleScriptIgnoringOutput([
-            "tell application \"iTerm2\"",
-            "activate",
-            "if (count of windows) > 0 then",
-            "tell current window",
-            "set newTab to (create tab with default profile command \"\(command.appleScriptEscaped())\")",
-            "set name of current session of newTab to \"\(marker.appleScriptEscaped())\"",
-            "end tell",
-            "else",
-            "set newWindow to (create window with default profile command \"\(command.appleScriptEscaped())\")",
-            "set name of current session of newWindow to \"\(marker.appleScriptEscaped())\"",
-            "end if",
-            "end tell",
-        ])
+        let escapedCommand = command.appleScriptEscaped()
+        let escapedMarker = marker.appleScriptEscaped()
+        var lines = [
+            "tell application id \"\(Self.iTermBundleIdentifier)\"",
+        ]
+
+        if appWasRunning, openNewWindow {
+            lines.append(contentsOf: [
+                "create window with default profile",
+                "delay 0.2",
+                "tell window 1",
+                "tell current session",
+                "write text \"\(escapedCommand)\"",
+                "set name to \"\(escapedMarker)\"",
+                "end tell",
+                "end tell",
+                "activate",
+            ])
+        } else if appWasRunning {
+            lines.append(contentsOf: [
+                "activate",
+                "if (count of windows) > 0 then",
+                "tell window 1",
+                "create tab with default profile",
+                "delay 0.2",
+                "tell current session",
+                "write text \"\(escapedCommand)\"",
+                "set name to \"\(escapedMarker)\"",
+                "end tell",
+                "end tell",
+                "else",
+                "create window with default profile",
+                "delay 0.2",
+                "tell window 1",
+                "tell current session",
+                "write text \"\(escapedCommand)\"",
+                "set name to \"\(escapedMarker)\"",
+                "end tell",
+                "end tell",
+                "end if",
+            ])
+        } else {
+            lines.append(contentsOf: [
+                "activate",
+                "set waitAttempts to 0",
+                "repeat while ((count of windows) = 0 and waitAttempts < 40)",
+                "delay 0.05",
+                "set waitAttempts to waitAttempts + 1",
+                "end repeat",
+                "if (count of windows) = 0 then",
+                "create window with default profile",
+                "delay 0.2",
+                "end if",
+                "tell window 1",
+                "tell current session",
+                "write text \"\(escapedCommand)\"",
+                "set name to \"\(escapedMarker)\"",
+                "end tell",
+                "end tell",
+            ])
+        }
+
+        lines.append("end tell")
+        return lines
+    }
+
+    private static func isITermRunning() -> Bool {
+        NSRunningApplication
+            .runningApplications(withBundleIdentifier: iTermBundleIdentifier)
+            .contains { !$0.isTerminated }
     }
 
     private func reuseITermSession(marker: String) throws -> Bool {
         let output = try runAppleScriptAndCapture([
-            "tell application \"iTerm2\"",
+            "tell application id \"\(Self.iTermBundleIdentifier)\"",
             "if not running then return \"not-running\"",
             "repeat with w in windows",
             "repeat with t in tabs of w",

@@ -26,6 +26,8 @@
 "settings-field-terminal" = "Terminal";
 "settings-ghostty-open-new-window" = "Open in new Ghostty window";
 "settings-ghostty-open-new-window-hint" = "Asks Ghostty to open each project in a separate window. Older Ghostty versions may still create a separate app instance.";
+"settings-iterm2-open-new-window" = "Open in new iTerm2 window";
+"settings-iterm2-open-new-window-hint" = "Open each project in a separate iTerm2 window instead of a new tab.";
 "settings-section-custom-terminal-command" = "Custom Terminal Command";
 "settings-custom-command-description" = "Shellporter will run this template for every resolved project.";
 "settings-field-template" = "Template";

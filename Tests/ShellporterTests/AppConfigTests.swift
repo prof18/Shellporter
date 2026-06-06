@@ -19,6 +19,7 @@ func appConfig_decodesLegacyConfigWithoutOptionalFields() throws {
     #expect(decoded.customCommandTemplate == "open -a Terminal {path}")
     #expect(decoded.hotkeyKeyCode == 17)
     #expect(decoded.hotkeyModifiers == 4096)
+    #expect(decoded.iTerm2OpenNewWindow)
     #expect(decoded.copyCommandHotkeyKeyCode == AppConfig.defaultCopyCommandHotkeyKeyCode)
     #expect(decoded.copyCommandHotkeyModifiers == AppConfig.defaultCopyCommandHotkeyModifiers)
 }

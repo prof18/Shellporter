@@ -46,6 +46,18 @@ func settingsPresentation_showsGhosttyOptionOnlyForGhostty() {
 }
 
 @Test
+func settingsPresentation_showsITerm2OptionOnlyForITerm2() {
+    var config = AppConfig.default
+    config.defaultTerminal = .terminal
+
+    #expect(!SettingsPresentation(config: config, canCopyDiagnostics: false).showsITerm2NewWindowOption)
+
+    config.defaultTerminal = .iTerm2
+
+    #expect(SettingsPresentation(config: config, canCopyDiagnostics: false).showsITerm2NewWindowOption)
+}
+
+@Test
 func settingsPresentation_validatesCustomCommandPathPlaceholder() {
     var config = AppConfig.default
 

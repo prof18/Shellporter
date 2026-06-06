@@ -93,6 +93,8 @@ struct AppConfig: Codable, Equatable {
     var customCommandTemplate: String
     /// When true, Ghostty opens a new window instead of reusing an existing window as a tab.
     var ghosttyOpenNewWindow: Bool
+    /// When true, iTerm2 opens projects in separate windows instead of tabs.
+    var iTerm2OpenNewWindow: Bool
     var hotkeyKeyCode: UInt32
     var hotkeyModifiers: UInt32
     var copyCommandHotkeyKeyCode: UInt32
@@ -107,6 +109,7 @@ struct AppConfig: Codable, Equatable {
         defaultTerminal: .terminal,
         customCommandTemplate: TerminalChoice.terminal.defaultCommandTemplate,
         ghosttyOpenNewWindow: false,
+        iTerm2OpenNewWindow: true,
         hotkeyKeyCode: defaultHotkeyKeyCode,
         hotkeyModifiers: defaultHotkeyModifiers,
         copyCommandHotkeyKeyCode: defaultCopyCommandHotkeyKeyCode,
@@ -117,6 +120,7 @@ struct AppConfig: Codable, Equatable {
         case defaultTerminal
         case customCommandTemplate
         case ghosttyOpenNewWindow
+        case iTerm2OpenNewWindow
         case hotkeyKeyCode
         case hotkeyModifiers
         case copyCommandHotkeyKeyCode
@@ -127,6 +131,7 @@ struct AppConfig: Codable, Equatable {
         defaultTerminal: TerminalChoice,
         customCommandTemplate: String,
         ghosttyOpenNewWindow: Bool,
+        iTerm2OpenNewWindow: Bool,
         hotkeyKeyCode: UInt32,
         hotkeyModifiers: UInt32,
         copyCommandHotkeyKeyCode: UInt32,
@@ -135,6 +140,7 @@ struct AppConfig: Codable, Equatable {
         self.defaultTerminal = defaultTerminal
         self.customCommandTemplate = customCommandTemplate
         self.ghosttyOpenNewWindow = ghosttyOpenNewWindow
+        self.iTerm2OpenNewWindow = iTerm2OpenNewWindow
         self.hotkeyKeyCode = hotkeyKeyCode
         self.hotkeyModifiers = hotkeyModifiers
         self.copyCommandHotkeyKeyCode = copyCommandHotkeyKeyCode
@@ -147,6 +153,7 @@ struct AppConfig: Codable, Equatable {
         customCommandTemplate = try container.decodeIfPresent(String.self, forKey: .customCommandTemplate)
             ?? TerminalChoice.terminal.defaultCommandTemplate
         ghosttyOpenNewWindow = try container.decodeIfPresent(Bool.self, forKey: .ghosttyOpenNewWindow) ?? false
+        iTerm2OpenNewWindow = try container.decodeIfPresent(Bool.self, forKey: .iTerm2OpenNewWindow) ?? true
         hotkeyKeyCode = try container.decodeIfPresent(UInt32.self, forKey: .hotkeyKeyCode)
             ?? AppConfig.defaultHotkeyKeyCode
         hotkeyModifiers = try container.decodeIfPresent(UInt32.self, forKey: .hotkeyModifiers)
@@ -162,6 +169,7 @@ struct AppConfig: Codable, Equatable {
         try container.encode(defaultTerminal, forKey: .defaultTerminal)
         try container.encode(customCommandTemplate, forKey: .customCommandTemplate)
         try container.encode(ghosttyOpenNewWindow, forKey: .ghosttyOpenNewWindow)
+        try container.encode(iTerm2OpenNewWindow, forKey: .iTerm2OpenNewWindow)
         try container.encode(hotkeyKeyCode, forKey: .hotkeyKeyCode)
         try container.encode(hotkeyModifiers, forKey: .hotkeyModifiers)
         try container.encode(copyCommandHotkeyKeyCode, forKey: .copyCommandHotkeyKeyCode)

@@ -138,6 +138,103 @@ func terminalLaunchScript_coldStartTargetsFirstWindow() {
     )
 }
 
+// MARK: - iTerm2 launch script
+
+@Test
+func iTermLaunchScript_runningAppCreatesNewWindowAndWritesCommandIntoShell() {
+    let path = URL(fileURLWithPath: "/Users/test/My Project")
+    let command = "cd \(path.path.shellEscapedForBash())".appleScriptEscaped()
+    let marker = "shellporter:/Users/test/My Project"
+
+    #expect(
+        TerminalLauncher.iTermLaunchScript(path: path) == [
+            "tell application id \"com.googlecode.iterm2\"",
+            "create window with default profile",
+            "delay 0.2",
+            "tell window 1",
+            "tell current session",
+            "write text \"\(command)\"",
+            "set name to \"\(marker)\"",
+            "end tell",
+            "end tell",
+            "activate",
+            "end tell",
+        ]
+    )
+
+    #expect(!TerminalLauncher.iTermLaunchScript(path: path).contains {
+        $0 == "create tab with default profile"
+    })
+}
+
+@Test
+func iTermLaunchScript_runningAppCanCreateTab() {
+    let path = URL(fileURLWithPath: "/Users/test/My Project")
+    let command = "cd \(path.path.shellEscapedForBash())".appleScriptEscaped()
+    let marker = "shellporter:/Users/test/My Project"
+
+    #expect(
+        TerminalLauncher.iTermLaunchScript(path: path, appWasRunning: true, openNewWindow: false) == [
+            "tell application id \"com.googlecode.iterm2\"",
+            "activate",
+            "if (count of windows) > 0 then",
+            "tell window 1",
+            "create tab with default profile",
+            "delay 0.2",
+            "tell current session",
+            "write text \"\(command)\"",
+            "set name to \"\(marker)\"",
+            "end tell",
+            "end tell",
+            "else",
+            "create window with default profile",
+            "delay 0.2",
+            "tell window 1",
+            "tell current session",
+            "write text \"\(command)\"",
+            "set name to \"\(marker)\"",
+            "end tell",
+            "end tell",
+            "end if",
+            "end tell",
+        ]
+    )
+}
+
+@Test
+func iTermLaunchScript_coldStartReusesInitialWindowSession() {
+    let path = URL(fileURLWithPath: "/Users/test/My Project")
+    let command = "cd \(path.path.shellEscapedForBash())".appleScriptEscaped()
+    let marker = "shellporter:/Users/test/My Project"
+
+    #expect(
+        TerminalLauncher.iTermLaunchScript(path: path, appWasRunning: false) == [
+            "tell application id \"com.googlecode.iterm2\"",
+            "activate",
+            "set waitAttempts to 0",
+            "repeat while ((count of windows) = 0 and waitAttempts < 40)",
+            "delay 0.05",
+            "set waitAttempts to waitAttempts + 1",
+            "end repeat",
+            "if (count of windows) = 0 then",
+            "create window with default profile",
+            "delay 0.2",
+            "end if",
+            "tell window 1",
+            "tell current session",
+            "write text \"\(command)\"",
+            "set name to \"\(marker)\"",
+            "end tell",
+            "end tell",
+            "end tell",
+        ]
+    )
+
+    #expect(!TerminalLauncher.iTermLaunchScript(path: path, appWasRunning: false).contains {
+        $0 == "create tab with default profile"
+    })
+}
+
 // MARK: - Ghostty launch script
 
 @Test

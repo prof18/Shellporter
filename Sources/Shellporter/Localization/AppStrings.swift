@@ -42,6 +42,8 @@ enum AppStrings {
         static let fieldTerminal = Localization.localized("settings-field-terminal")
         static let ghosttyOpenNewWindow = Localization.localized("settings-ghostty-open-new-window")
         static let ghosttyOpenNewWindowHint = Localization.localized("settings-ghostty-open-new-window-hint")
+        static let iTerm2OpenNewWindow = Localization.localized("settings-iterm2-open-new-window")
+        static let iTerm2OpenNewWindowHint = Localization.localized("settings-iterm2-open-new-window-hint")
         static let sectionCustomTerminalCommand = Localization.localized("settings-section-custom-terminal-command")
         static let customCommandDescription = Localization.localized("settings-custom-command-description")
         static let fieldTemplate = Localization.localized("settings-field-template")
