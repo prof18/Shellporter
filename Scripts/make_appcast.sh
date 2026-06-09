@@ -9,6 +9,7 @@ ZIP=${1:?
 "Usage: $0 Shellporter-<ver>.zip"}
 FEED_URL=${2:-${SPARKLE_FEED_URL:-"https://raw.githubusercontent.com/prof18/shellporter/main/appcast.xml"}}
 PRIVATE_KEY_FILE=${SPARKLE_PRIVATE_KEY_FILE:-}
+GENERATE_APPCAST=${GENERATE_APPCAST:-}
 if [[ ! -f "$ZIP" ]]; then
   echo "Zip not found: $ZIP" >&2
   exit 1
@@ -56,9 +57,15 @@ trap cleanup EXIT
 
 DOWNLOAD_URL_PREFIX=${SPARKLE_DOWNLOAD_URL_PREFIX:-"https://github.com/prof18/shellporter/releases/download/v${VERSION}/"}
 
-if ! command -v generate_appcast >/dev/null; then
-  echo "generate_appcast not found in PATH. Install Sparkle tools." >&2
-  exit 1
+if [[ -z "$GENERATE_APPCAST" ]]; then
+  if command -v generate_appcast >/dev/null; then
+    GENERATE_APPCAST="$(command -v generate_appcast)"
+  elif [[ -x "$ROOT/.build/artifacts/sparkle/Sparkle/bin/generate_appcast" ]]; then
+    GENERATE_APPCAST="$ROOT/.build/artifacts/sparkle/Sparkle/bin/generate_appcast"
+  else
+    echo "generate_appcast not found. Build dependencies or install Sparkle tools first." >&2
+    exit 1
+  fi
 fi
 
 WORK_DIR=$(mktemp -d /tmp/appcast.XXXXXX)
@@ -68,7 +75,7 @@ cp "$ZIP" "$WORK_DIR/$ZIP_NAME"
 cp "$NOTES_HTML" "$WORK_DIR/$ZIP_BASE.html"
 
 pushd "$WORK_DIR" >/dev/null
-APPCAST_CMD=(generate_appcast)
+APPCAST_CMD=("$GENERATE_APPCAST")
 if [[ -n "$PRIVATE_KEY_FILE" ]]; then
   APPCAST_CMD+=(--ed-key-file "$PRIVATE_KEY_FILE")
 fi
