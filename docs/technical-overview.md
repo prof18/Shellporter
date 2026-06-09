@@ -56,6 +56,7 @@ Tests/ShellporterTests/                   Unit tests for resolvers, config, heur
 Scripts/
   compile_and_run.sh                      Kill + package + relaunch dev loop
   package_app.sh                          .app bundle assembly + signing
+  make_dmg.sh                             Manual-install DMG assembly + notarization
   setup_dev_signing.sh                    Create stable local codesign identity
   sign-and-notarize.sh                    Notarization (scaffolded)
   make_appcast.sh                         Sparkle appcast generation (scaffolded)
@@ -393,7 +394,7 @@ Read from `version.env` at project root (if present), otherwise defaults to `0.1
 
 ### Notarization
 
-`sign-and-notarize.sh` and `make_appcast.sh` exist as scaffolding for future distribution via Sparkle, but are not wired into CI.
+`sign-and-notarize.sh`, `make_dmg.sh`, and `make_appcast.sh` support the manual release flow. The zip remains the Sparkle update artifact; the DMG is the GitHub Release artifact for manual installation.
 
 ## Quirks and Non-Obvious Details
 

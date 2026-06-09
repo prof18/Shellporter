@@ -11,6 +11,11 @@ Step-by-step checklist for publishing a new Shellporter release.
 - [ ] Sparkle CLI tools installed (`brew install --cask sparkle`) — provides `generate_appcast`
 - [ ] GitHub repo remote configured and `gh` CLI authenticated
 
+Every public release ships two artifacts:
+
+- `Shellporter-X.Y.Z.dmg` for manual user installation.
+- `Shellporter-X.Y.Z.zip` for Sparkle automatic updates and `appcast.xml`.
+
 ## Release checklist
 
 ### 1. Bump version
@@ -51,20 +56,28 @@ swift test
 
 This produces `Shellporter-X.Y.Z.zip` (universal binary, signed, notarized, stapled).
 
-### 5. Create a GitHub Release
+### 5. Create the manual-install DMG
+
+```bash
+./Scripts/make_dmg.sh --notarize
+```
+
+This produces `Shellporter-X.Y.Z.dmg` (signed, notarized, stapled) for users installing Shellporter manually.
+
+### 6. Create a GitHub Release
 
 ```bash
 git tag vX.Y.Z
 git push origin vX.Y.Z
 
-gh release create vX.Y.Z Shellporter-X.Y.Z.zip \
+gh release create vX.Y.Z Shellporter-X.Y.Z.dmg Shellporter-X.Y.Z.zip \
   --title "Shellporter X.Y.Z" \
   --notes-file <(sed -n '/^## X.Y.Z$/,/^## /{ /^## X.Y.Z$/d; /^## /d; p; }' CHANGELOG.md)
 ```
 
-Or create the release manually on GitHub and upload the zip.
+Or create the release manually on GitHub and upload both assets.
 
-### 6. Generate the appcast
+### 7. Generate the appcast
 
 ```bash
 SPARKLE_PRIVATE_KEY_FILE=~/sparkle_ed25519_key \
@@ -73,7 +86,7 @@ SPARKLE_PRIVATE_KEY_FILE=~/sparkle_ed25519_key \
 
 This updates `appcast.xml` with the new entry (version, download URL, EdDSA signature, embedded release notes).
 
-### 7. Commit and push the appcast
+### 8. Commit and push the appcast
 
 ```bash
 git add appcast.xml
@@ -83,10 +96,12 @@ git push origin main
 
 The appcast is served from the URL configured as `SPARKLE_FEED_URL` in `.env`. Once pushed, existing users will see the update.
 
-### 8. Verify
+### 9. Verify
 
 - [ ] `appcast.xml` contains the new version entry with an `edSignature`
-- [ ] Download URL in the appcast returns 200: `curl -sI <url> | head -1`
+- [ ] Zip download URL in the appcast returns 200: `curl -sI <url> | head -1`
+- [ ] DMG passes Gatekeeper: `spctl -a -t open --context context:primary-signature -vv Shellporter-X.Y.Z.dmg`
+- [ ] DMG has a stapled ticket: `xcrun stapler validate Shellporter-X.Y.Z.dmg`
 - [ ] Install a previous version and click "Check for Updates" to confirm the flow works
 
 ## Environment variables reference
@@ -97,5 +112,7 @@ The appcast is served from the URL configured as `SPARKLE_FEED_URL` in `.env`. O
 | `APP_IDENTITY` | Override signing identity (defaults to Developer ID) |
 | `KEYCHAIN_PROFILE` | Notarization keychain profile (defaults to `NOTARIZATION_PASSWORD`) |
 | `ARCHES` | Build architectures (defaults to `arm64 x86_64`) |
+| `DMG_NAME` | Override the generated DMG filename |
+| `VOLUME_NAME` | Override the mounted DMG volume name |
 | `SPARKLE_DOWNLOAD_URL_PREFIX` | Override download URL base in appcast |
 | `SPARKLE_FEED_URL` | Override appcast feed URL |

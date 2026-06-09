@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.5
+
+- Add a signed and notarized DMG release artifact for easier manual installation
+- Keep the zip artifact for Sparkle automatic updates and appcast generation
+- Update release documentation and installation instructions for the new DMG flow
+- Refresh website and README content for the current launch behavior
+
 ## 0.1.4
 
 - Show only installed terminals in settings and the Open With menu
