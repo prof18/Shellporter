@@ -15,7 +15,7 @@ A macOS menu bar utility that opens a terminal in the project directory of the a
 
 ## Installation
 
-Download the latest Shellporter DMG from the [GitHub Releases](https://github.com/prof18/shellporter/releases) page.
+Download the latest Shellporter DMG directly from [GitHub Releases](https://github.com/prof18/shellporter/releases/latest/download/Shellporter.dmg).
 
 Open the DMG and drag `Shellporter.app` to Applications. The zip asset is used for Sparkle automatic updates.
 

@@ -13,7 +13,7 @@ Step-by-step checklist for publishing a new Shellporter release.
 
 Every public release ships two artifacts:
 
-- `Shellporter-X.Y.Z.dmg` for manual user installation.
+- `Shellporter.dmg` for manual user installation and the stable website download URL.
 - `Shellporter-X.Y.Z.zip` for Sparkle automatic updates and `appcast.xml`.
 
 ## Release checklist
@@ -62,7 +62,7 @@ This produces `Shellporter-X.Y.Z.zip` (universal binary, signed, notarized, stap
 ./Scripts/make_dmg.sh --notarize
 ```
 
-This produces `Shellporter-X.Y.Z.dmg` (signed, notarized, stapled) for users installing Shellporter manually.
+This produces `Shellporter.dmg` (signed, notarized, stapled) for users installing Shellporter manually.
 
 ### 6. Create a GitHub Release
 
@@ -70,7 +70,7 @@ This produces `Shellporter-X.Y.Z.dmg` (signed, notarized, stapled) for users ins
 git tag vX.Y.Z
 git push origin vX.Y.Z
 
-gh release create vX.Y.Z Shellporter-X.Y.Z.dmg Shellporter-X.Y.Z.zip \
+gh release create vX.Y.Z Shellporter.dmg Shellporter-X.Y.Z.zip \
   --title "Shellporter X.Y.Z" \
   --notes-file <(sed -n '/^## X.Y.Z$/,/^## /{ /^## X.Y.Z$/d; /^## /d; p; }' CHANGELOG.md)
 ```
@@ -100,8 +100,8 @@ The appcast is served from the URL configured as `SPARKLE_FEED_URL` in `.env`. O
 
 - [ ] `appcast.xml` contains the new version entry with an `edSignature`
 - [ ] Zip download URL in the appcast returns 200: `curl -sI <url> | head -1`
-- [ ] DMG passes Gatekeeper: `spctl -a -t open --context context:primary-signature -vv Shellporter-X.Y.Z.dmg`
-- [ ] DMG has a stapled ticket: `xcrun stapler validate Shellporter-X.Y.Z.dmg`
+- [ ] DMG passes Gatekeeper: `spctl -a -t open --context context:primary-signature -vv Shellporter.dmg`
+- [ ] DMG has a stapled ticket: `xcrun stapler validate Shellporter.dmg`
 - [ ] Install a previous version and click "Check for Updates" to confirm the flow works
 
 ## Environment variables reference
